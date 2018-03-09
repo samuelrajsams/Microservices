@@ -1,5 +1,4 @@
-var app = require('express')(),
-    LoginModel = require('../models/loginModel'),
+var LoginModel = require('../models/loginModel'),
     crypto = require('crypto'),
     config = require('../config/main'),
     lm;
@@ -10,12 +9,11 @@ function LoginController() {
 }
 
 LoginController.prototype.authenticate = function (req, res, next) {
-    params = {
+    var params = {
         email: req.body.email,
         password: crypto.createHash('md5').update(req.body.password).digest("hex")
     };
     lm.login(params, function (err, data) {
-        console.log(data);
         if (err) {
             res.status(422).send(err);
         } else {

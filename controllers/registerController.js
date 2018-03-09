@@ -7,7 +7,7 @@ function registerController() {
 }
 
 registerController.prototype.register = function (req, res, next) {
-    params = {
+    var params = {
         email: req.body.email,
         password: crypto.createHash('md5').update(req.body.password).digest("hex"),
         name : req.body.name,

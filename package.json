@@ -1,0 +1,80 @@
+{
+  "name": "microservices",
+  "version": "0.1.0",
+  "description": "Trips & More Micro Services",
+  "main": "app",
+  "scripts": {
+    "dev": "nodemon -w ./ --exec \"babel-node ./ --presets es2015,stage-0\"",
+    "build": "babel ./ -s -D -d dist --presets es2015,stage-0  --ignore node_modules",
+    "start": "node dist",
+    "//build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "//start": "npm run build && node dist/app.js",
+    "prestart": "npm run -s build",
+    "test": "eslint ./"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  },
+  "license": "NA",
+  "dependencies": {
+    "aws-sdk": "2.7.19",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "busboy": "0.2.13",
+    "compression": "^1.7.1",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "crypto": "^1.0.1",
+    "cson-parser": "1.1.1",
+    "csv-parser": "1.11.0",
+    "csvtojson": "1.1.9",
+    "elasticsearch": "14.0.0",
+    "express": "^4.16.2",
+    "express-session": "~1.14.1",
+    "fairmont": "~0.8.2",
+    "fb": "2.0.0",
+    "jsonwebtoken": "^8.1.0",
+    "key-forge": "1.0.0-beta-01",
+    "log4js": "~0.6.16",
+    "method-override": "~2.3.6",
+    "mime-types": "2.1.13",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0",
+    "nodemailer": "4.4.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "~1.0.2",
+    "passport-google-oauth": "~0.1.5",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "~1.0.4",
+    "pug": "2.0.0-beta6",
+    "redis": "2.5.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.2.2",
+    "resource-router-middleware": "^0.6.0",
+    "shortid": "2.2.6",
+    "unzip-response": "^3.0.0",
+    "urlencode": "1.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.9.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.1.1",
+    "nodemon": "^1.9.2",
+    "rimraf": "^2.6.2"
+  },
+  "private": true
+}

@@ -1,11 +1,10 @@
-var userSchema = require('./user'),
-mongoose = require("mongoose"),
-User = mongoose.model("User", userSchema);
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/usersData");
+var userModel = require('./userModel'),
+    user;
 
 function registerModel() {
+    user = new userModel();
 }
+
 registerModel.prototype.signUp = function (params, callback) {
     if (!params.email) {
         callback({err: 'You must enter an email address.'})
@@ -16,15 +15,18 @@ registerModel.prototype.signUp = function (params, callback) {
     if (!params.password) {
         callback({err: 'You must enter a password.'})
     }
-    User.findOne({email: params.email }, function (err, existingUser) {
-        if (err) { 
-            return (err) 
+    user.findOne(params.email, function (err, existingUser) {
+        if (err) {
+            return (err)
         }
         if (existingUser) {
             callback({err: 'Email address is already in use.'})
         } else {
-            var myData = new User(params);
-            myData.save({},function(err ,data) {
+            user.email = params.email.toLowerCase();
+            user.username = params.email.toLowerCase();
+            user.password = params.password;
+            user.name = params.name;
+            user.create(user, function (err , data) {
                 if (err) {
                     callback({err: "unable to save to database"});
                 } else {
@@ -32,7 +34,7 @@ registerModel.prototype.signUp = function (params, callback) {
                 }
             });
         }
-    });   
-}
+    });
+};
 module.exports = registerModel;
 
